@@ -1,0 +1,2824 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>auth: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/Banjirome/yandex-music-go/auth/storage.go (0.0%)</option>
+				
+				<option value="file1">github.com/Banjirome/yandex-music-go/client/account_service.go (0.0%)</option>
+				
+				<option value="file2">github.com/Banjirome/yandex-music-go/client/album_service.go (81.0%)</option>
+				
+				<option value="file3">github.com/Banjirome/yandex-music-go/client/artist_service.go (40.0%)</option>
+				
+				<option value="file4">github.com/Banjirome/yandex-music-go/client/client.go (69.5%)</option>
+				
+				<option value="file5">github.com/Banjirome/yandex-music-go/client/downloader.go (0.0%)</option>
+				
+				<option value="file6">github.com/Banjirome/yandex-music-go/client/feed_service.go (0.0%)</option>
+				
+				<option value="file7">github.com/Banjirome/yandex-music-go/client/generic_service.go (0.0%)</option>
+				
+				<option value="file8">github.com/Banjirome/yandex-music-go/client/landing_service.go (0.0%)</option>
+				
+				<option value="file9">github.com/Banjirome/yandex-music-go/client/library_service.go (0.0%)</option>
+				
+				<option value="file10">github.com/Banjirome/yandex-music-go/client/options.go (26.3%)</option>
+				
+				<option value="file11">github.com/Banjirome/yandex-music-go/client/playlist_service.go (47.4%)</option>
+				
+				<option value="file12">github.com/Banjirome/yandex-music-go/client/queue_service.go (0.0%)</option>
+				
+				<option value="file13">github.com/Banjirome/yandex-music-go/client/radio_service.go (0.0%)</option>
+				
+				<option value="file14">github.com/Banjirome/yandex-music-go/client/track_service.go (45.4%)</option>
+				
+				<option value="file15">github.com/Banjirome/yandex-music-go/client/ugc_service.go (0.0%)</option>
+				
+				<option value="file16">github.com/Banjirome/yandex-music-go/client/user_service.go (0.0%)</option>
+				
+				<option value="file17">github.com/Banjirome/yandex-music-go/client/ynison_service.go (0.0%)</option>
+				
+				<option value="file18">github.com/Banjirome/yandex-music-go/example_main.go (0.0%)</option>
+				
+				<option value="file19">github.com/Banjirome/yandex-music-go/models/common.go (0.0%)</option>
+				
+				<option value="file20">github.com/Banjirome/yandex-music-go/radio/models.go (0.0%)</option>
+				
+				<option value="file21">github.com/Banjirome/yandex-music-go/search/search.go (56.2%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package auth
+
+import "net/url"
+
+// Storage хранит данные авторизации и сетевые настройки.
+type Storage struct {
+        Token        string
+        DeviceID     string
+        Proxy        *url.URL
+        User         *User
+        IsAuthorized bool
+        AuthToken    *AuthToken
+        AccessToken  *AccessToken
+}
+
+// New создаёт новое хранилище с опциональным токеном.
+func New(token string) *Storage <span class="cov0" title="0">{
+        return &amp;Storage{Token: token, DeviceID: "go-sdk", User: &amp;User{}}
+}</span>
+
+// SetProxy настраивает прокси.
+func (s *Storage) SetProxy(u *url.URL) <span class="cov0" title="0">{ s.Proxy = u }</span>
+
+// User представляет текущего авторизованного пользователя.
+type User struct {
+        Uid   string
+        Login string
+}
+
+// AuthToken хранит csrf и track для многошаговой авторизации.
+type AuthToken struct {
+        CsrfToken string
+        TrackId   string
+}
+
+// AccessToken хранит полученный OAuth music token.
+type AccessToken struct {
+        AccessToken string
+        TokenType   string
+        ExpiresIn   int
+}
+
+// SetUid устанавливает идентификатор пользователя.
+func (s *Storage) SetUid(uid string) <span class="cov0" title="0">{
+        if s.User == nil </span><span class="cov0" title="0">{
+                s.User = &amp;User{}
+        }</span>
+        <span class="cov0" title="0">s.User.Uid = uid</span>
+}
+
+// SetLogin устанавливает логин пользователя.
+func (s *Storage) SetLogin(login string) <span class="cov0" title="0">{
+        if s.User == nil </span><span class="cov0" title="0">{
+                s.User = &amp;User{}
+        }</span>
+        <span class="cov0" title="0">s.User.Login = login</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package client
+
+import (
+        "context"
+        "net/http"
+
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+type AccountService struct{ c *Client }
+
+type accountStatusResult struct {
+        Account struct {
+                Uid string `json:"uid"`
+        } `json:"account"`
+}
+
+// Status вызывает account/status и обновляет auth.User.Uid.
+func (s *AccountService) Status(ctx context.Context) (*models.Response[accountStatusResult], error) <span class="cov0" title="0">{
+        resp, err := doJSON[accountStatusResult](s.c, ctx, http.MethodGet, "account/status", nil, nil)
+        if err == nil &amp;&amp; resp != nil &amp;&amp; resp.Result.Account.Uid != "" </span><span class="cov0" title="0">{
+                s.c.auth.SetUid(resp.Result.Account.Uid)
+        }</span>
+        <span class="cov0" title="0">return resp, err</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package client
+
+import (
+        "bytes"
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/album"
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+type AlbumService struct{ c *Client }
+
+// Get returns album with tracks (GET /albums/{id}/with-tracks)
+func (s *AlbumService) Get(ctx context.Context, id string) (*models.Response[album.Album], error) <span class="cov8" title="1">{
+        p := path.Join("albums", id, "with-tracks")
+        return doJSON[album.Album](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// GetMany returns multiple albums (POST /albums form album-ids=...)
+func (s *AlbumService) GetMany(ctx context.Context, ids ...string) (*models.Response[[]album.Album], error) <span class="cov8" title="1">{
+        form := url.Values{}
+        form.Set("album-ids", strings.Join(ids, ","))
+        req, err := s.c.newRequest(ctx, http.MethodPost, "albums", nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">body := form.Encode()
+        req.Body = io.NopCloser(bytes.NewBufferString(body))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+        data, _ := io.ReadAll(resp.Body)
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("albums: %s", resp.Status)
+        }</span>
+        <span class="cov8" title="1">var out models.Response[[]album.Album]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">return &amp;out, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package client
+
+import (
+        "bytes"
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "strconv"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/artist"
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+type ArtistService struct{ c *Client }
+
+// Get brief-info for artist (GET /artists/{id}/brief-info)
+func (s *ArtistService) Get(ctx context.Context, id string) (*models.Response[artist.ArtistBriefInfo], error) <span class="cov8" title="1">{
+        p := path.Join("artists", id, "brief-info")
+        return doJSON[artist.ArtistBriefInfo](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// GetMany artists (POST /artists form artist-Ids=...)
+func (s *ArtistService) GetMany(ctx context.Context, ids ...string) (*models.Response[[]artist.Artist], error) <span class="cov0" title="0">{
+        form := url.Values{}
+        form.Set("artist-Ids", strings.Join(ids, ","))
+        req, err := s.c.newRequest(ctx, http.MethodPost, "artists", nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">body := form.Encode()
+        req.Body = io.NopCloser(bytes.NewBufferString(body))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        data, _ := io.ReadAll(resp.Body)
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("artists: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[[]artist.Artist]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// GetTracks paginated (GET /artists/{id}/tracks?page=&amp;pageSize=)
+func (s *ArtistService) GetTracks(ctx context.Context, id string, page, pageSize int) (*models.Response[artist.TracksPage], error) <span class="cov8" title="1">{
+        q := url.Values{}
+        q.Set("page", strconv.Itoa(page))
+        q.Set("pageSize", strconv.Itoa(pageSize))
+        p := path.Join("artists", id, "tracks")
+        return doJSON[artist.TracksPage](s.c, ctx, http.MethodGet, p, q, nil)
+}</span>
+
+// GetAllTracks loads brief-info first to get total tracks count and then fetches single page with all tracks.
+func (s *ArtistService) GetAllTracks(ctx context.Context, id string) (*models.Response[artist.TracksPage], error) <span class="cov8" title="1">{
+        brief, err := s.Get(ctx, id)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">total := 0
+        if brief.Result.Artist != nil &amp;&amp; brief.Result.Artist.Counts != nil </span><span class="cov8" title="1">{
+                total = brief.Result.Artist.Counts.Tracks
+        }</span>
+        <span class="cov8" title="1">if total == 0 </span><span class="cov0" title="0">{ // fallback to default page fetch
+                return s.GetTracks(ctx, id, 0, 20)
+        }</span>
+        <span class="cov8" title="1">return s.GetTracks(ctx, id, 0, total)</span>
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package client
+
+import (
+        "compress/gzip"
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/http/cookiejar"
+        "net/url"
+        "path"
+        "strings"
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/auth"
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/search"
+)
+
+// Client корневой объект SDK.
+type Client struct {
+        cfg  Config
+        http *http.Client
+        auth *auth.Storage
+
+        Search   *search.Service
+        Album    *AlbumService
+        Artist   *ArtistService
+        Track    *TrackService
+        Account  *AccountService
+        Playlist *PlaylistService
+        User     *UserService
+        Queue    *QueueService
+        Radio    *RadioService
+        Library  *LibraryService
+        Landing  *LandingService
+        Feed     *FeedService
+        Label    *GenericService
+        Ugc      *UgcService
+        Ynison   *YnisonService
+
+        Downloader *Downloader
+}
+
+// New создаёт новый клиент.
+func New(opts ...Option) *Client <span class="cov8" title="1">{
+        cfg := defaultConfig()
+        for _, o := range opts </span><span class="cov8" title="1">{
+                o(&amp;cfg)
+        }</span>
+        <span class="cov8" title="1">if cfg.HTTPClient == nil </span><span class="cov8" title="1">{
+                cfg.HTTPClient = &amp;http.Client{Timeout: 15 * time.Second}
+        }</span>
+        <span class="cov8" title="1">if cfg.HTTPClient.Jar == nil </span><span class="cov8" title="1">{
+                if jar, err := cookiejar.New(nil); err == nil </span><span class="cov8" title="1">{
+                        cfg.HTTPClient.Jar = jar
+                }</span>
+        }
+        <span class="cov8" title="1">if cfg.AuthStorage == nil </span><span class="cov8" title="1">{
+                cfg.AuthStorage = auth.New("")
+        }</span>
+
+        <span class="cov8" title="1">c := &amp;Client{cfg: cfg, http: cfg.HTTPClient, auth: cfg.AuthStorage}
+
+        c.Search = search.NewService(c)
+        c.Album = &amp;AlbumService{c: c}
+        c.Artist = &amp;ArtistService{c: c}
+        c.Track = &amp;TrackService{c: c}
+        c.Account = &amp;AccountService{c: c}
+        c.Playlist = &amp;PlaylistService{c: c}
+        c.User = &amp;UserService{c: c}
+        c.Queue = &amp;QueueService{c: c}
+        c.Radio = &amp;RadioService{c: c}
+        c.Library = &amp;LibraryService{c: c}
+        c.Landing = &amp;LandingService{c: c}
+        c.Feed = &amp;FeedService{c: c}
+        c.Label = &amp;GenericService{c: c, basePath: "labels"}
+        c.Ugc = &amp;UgcService{c: c}
+        c.Ynison = &amp;YnisonService{c: c}
+
+        c.Downloader = &amp;Downloader{c: c}
+        return c</span>
+}
+
+// SearchDo реализует internal интерфейс search.Service.
+func (c *Client) SearchDo(ctx context.Context, typ search.Type, text string, page, pageSize int) (*models.Response[search.Search], error) <span class="cov0" title="0">{
+        q := search.BuildQuery(text, typ, page, pageSize)
+        return doJSON[search.Search](c, ctx, http.MethodGet, "search", q, nil)
+}</span>
+
+// SuggestDo implements search suggest.
+func (c *Client) SuggestDo(ctx context.Context, part string) (*models.Response[search.Suggest], error) <span class="cov0" title="0">{
+        q := url.Values{}
+        q.Set("part", part)
+        return doJSON[search.Suggest](c, ctx, http.MethodGet, "search/suggest", q, nil)
+}</span>
+
+// newRequest формирует http.Request.
+func (c *Client) newRequest(ctx context.Context, method, p string, q url.Values, body any) (*http.Request, error) <span class="cov8" title="1">{
+        base := strings.TrimRight(c.cfg.BaseURL, "/")
+        u, err := url.Parse(base)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">u.Path = path.Join(u.Path, p)
+        if q != nil </span><span class="cov8" title="1">{
+                u.RawQuery = q.Encode()
+        }</span>
+
+        <span class="cov8" title="1">var r io.Reader
+        if body != nil </span><span class="cov0" title="0">{
+                b, err := json.Marshal(body)
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">r = io.NopCloser(strings.NewReader(string(b)))</span>
+        }
+
+        <span class="cov8" title="1">req, err := http.NewRequestWithContext(ctx, method, u.String(), r)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">if body != nil </span><span class="cov0" title="0">{
+                req.Header.Set("Content-Type", "application/json")
+        }</span>
+        <span class="cov8" title="1">if c.auth.Token != "" </span><span class="cov0" title="0">{
+                req.Header.Set("Authorization", "OAuth "+c.auth.Token)
+        }</span>
+        <span class="cov8" title="1">if c.cfg.UserAgent != "" </span><span class="cov8" title="1">{
+                req.Header.Set("User-Agent", c.cfg.UserAgent)
+        }</span>
+        <span class="cov8" title="1">req.Header.Set("Accept-Encoding", "gzip")
+        return req, nil</span>
+}
+
+// doJSON выполняет запрос и декодирует JSON в Response[T].
+// doJSON выполняет запрос и декодирует JSON.
+func doJSON[T any](c *Client, ctx context.Context, method, p string, q url.Values, body any) (*models.Response[T], error) <span class="cov8" title="1">{
+        req, err := c.newRequest(ctx, method, p, q, body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">resp, err := c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+
+        var reader io.Reader = resp.Body
+        if resp.Header.Get("Content-Encoding") == "gzip" </span><span class="cov0" title="0">{
+                gz, err := gzip.NewReader(resp.Body)
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">defer gz.Close()
+                reader = gz</span>
+        }
+
+        <span class="cov8" title="1">data, err := io.ReadAll(reader)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                apiErr := &amp;models.APIError{StatusCode: resp.StatusCode}
+                _ = json.Unmarshal(data, apiErr) // best-effort (Body field)
+                return nil, apiErr
+        }</span>
+
+        <span class="cov8" title="1">var out models.Response[T]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("decode response: %w", err)
+        }</span>
+        <span class="cov8" title="1">return &amp;out, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package client
+
+import (
+        "context"
+        "fmt"
+        "io"
+        "net/http"
+        "os"
+)
+
+// Downloader упрощённый аналог DataDownloader из C#.
+type Downloader struct{ c *Client }
+
+// Stream возвращает поток ответа.
+func (d *Downloader) Stream(ctx context.Context, url string) (io.ReadCloser, error) <span class="cov0" title="0">{
+        req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">resp, err := d.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+                resp.Body.Close()
+                return nil, fmt.Errorf("download failed: %s (%d) %s", resp.Status, resp.StatusCode, string(b))
+        }</span>
+        <span class="cov0" title="0">return resp.Body, nil</span>
+}
+
+// Bytes загружает контент как байты.
+func (d *Downloader) Bytes(ctx context.Context, url string) ([]byte, error) <span class="cov0" title="0">{
+        rc, err := d.Stream(ctx, url)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer rc.Close()
+        return io.ReadAll(rc)</span>
+}
+
+// ToFile сохраняет ресурс в файл.
+func (d *Downloader) ToFile(ctx context.Context, url, filename string) error <span class="cov0" title="0">{
+        rc, err := d.Stream(ctx, url)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer rc.Close()
+        f, err := os.Create(filename)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer f.Close()
+        _, err = io.Copy(f, rc)
+        return err</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package client
+
+import (
+        "context"
+        "net/http"
+
+        "github.com/Banjirome/yandex-music-go/feed"
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+// FeedService реализует получение персональной ленты /feed.
+type FeedService struct{ c *Client }
+
+// Get возвращает ленту (аналог YGetFeedBuilder).
+func (s *FeedService) Get(ctx context.Context) (*models.Response[feed.Feed], error) <span class="cov0" title="0">{
+        return doJSON[feed.Feed](s.c, ctx, http.MethodGet, "feed", nil, nil)
+}</span>
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package client
+
+import (
+        "context"
+        "encoding/json"
+        "fmt"
+        "net/http"
+        "net/url"
+)
+
+// RawResult представляет собой произвольный JSON результат.
+type RawResult map[string]any
+
+// GenericService предоставляет упрощённые методы Get/List для не реализованных пока веток.
+type GenericService struct {
+        c        *Client
+        basePath string
+}
+
+// Get выполняет GET /{basePath}/{id}
+func (s *GenericService) Get(ctx context.Context, id string) (RawResult, error) <span class="cov0" title="0">{
+        resp, err := s.c.newRequest(ctx, http.MethodGet, fmt.Sprintf("%s/%s", s.basePath, id), nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">r, err := s.c.http.Do(resp)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer r.Body.Close()
+        if r.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("api error: %s", r.Status)
+        }</span>
+        <span class="cov0" title="0">var out RawResult
+        if err := json.NewDecoder(r.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return out, nil</span>
+}
+
+// List выполняет GET /{basePath}?...
+func (s *GenericService) List(ctx context.Context, query url.Values) ([]RawResult, error) <span class="cov0" title="0">{
+        resp, err := s.c.newRequest(ctx, http.MethodGet, s.basePath, query, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">r, err := s.c.http.Do(resp)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer r.Body.Close()
+        if r.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("api error: %s", r.Status)
+        }</span>
+        <span class="cov0" title="0">var out []RawResult
+        if err := json.NewDecoder(r.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return out, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package client
+
+import (
+        "context"
+        "fmt"
+        "net/http"
+        "net/url"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/landing"
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+// LandingService provides access to landing3, feed and children-landing endpoints.
+type LandingService struct {
+        c *Client
+}
+
+// Get fetches personalized landing blocks. Blocks slice must be non-empty.
+// Mirrors GET /landing3?blocks=b1,b2,... with block identifiers matching C# enum values.
+func (s *LandingService) Get(ctx context.Context, blocks ...landing.BlockType) (*models.Response[landing.Landing], error) <span class="cov0" title="0">{
+        if len(blocks) == 0 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("at least one block required")
+        }</span>
+        <span class="cov0" title="0">bvals := make([]string, len(blocks))
+        for i, b := range blocks </span><span class="cov0" title="0">{
+                bvals[i] = string(b)
+        }</span>
+        <span class="cov0" title="0">q := url.Values{}
+        q.Set("blocks", strings.Join(bvals, ","))
+        return doJSON[landing.Landing](s.c, ctx, http.MethodGet, "landing3", q, nil)</span>
+}
+
+// Feed fetches user feed. GET /feed
+func (s *LandingService) Feed(ctx context.Context) (*models.Response[map[string]any], error) <span class="cov0" title="0">{
+        return doJSON[map[string]any](s.c, ctx, http.MethodGet, "feed", nil, nil)
+}</span>
+
+// Children fetches children landing. GET /children-landing/catalogue
+func (s *LandingService) Children(ctx context.Context) (*models.Response[landing.ChildrenLanding], error) <span class="cov0" title="0">{
+        return doJSON[landing.ChildrenLanding](s.c, ctx, http.MethodGet, "children-landing/catalogue", nil, nil)
+}</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package client
+
+import (
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/library"
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/playlist"
+)
+
+// LibraryService implements YLibraryAPI parity (likes/dislikes &amp; recently listened).
+type LibraryService struct{ c *Client }
+
+// internal helper building path: users/{uid}/{type}/{section}
+func (s *LibraryService) sectionPath(section library.Section, typ library.SectionType) (string, error) <span class="cov0" title="0">{
+        if s.c.auth == nil || s.c.auth.User == nil || s.c.auth.User.Uid == "" </span><span class="cov0" title="0">{
+                return "", fmt.Errorf("user uid not set; call Account.Status first")
+        }</span>
+        <span class="cov0" title="0">return path.Join("users", s.c.auth.User.Uid, string(typ), string(section)), nil</span>
+}
+
+// generic GET for sections
+func getSection[T any](s *LibraryService, ctx context.Context, section library.Section, typ library.SectionType) (*models.Response[T], error) <span class="cov0" title="0">{
+        p, err := s.sectionPath(section, typ)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return doJSON[T](s.c, ctx, http.MethodGet, p, nil, nil)</span>
+}
+
+// Liked entities
+func (s *LibraryService) LikedTracks(ctx context.Context) (*models.Response[library.LibraryTracks], error) <span class="cov0" title="0">{
+        return getSection[library.LibraryTracks](s, ctx, library.SectionTracks, library.SectionTypeLikes)
+}</span>
+func (s *LibraryService) LikedAlbums(ctx context.Context) (*models.Response[[]library.LibraryAlbum], error) <span class="cov0" title="0">{
+        return getSection[[]library.LibraryAlbum](s, ctx, library.SectionAlbums, library.SectionTypeLikes)
+}</span>
+func (s *LibraryService) LikedArtists(ctx context.Context) (*models.Response[[]any], error) <span class="cov0" title="0">{ // TODO: implement full artist model ref if needed
+        return getSection[[]any](s, ctx, library.SectionArtists, library.SectionTypeLikes)
+}</span>
+func (s *LibraryService) LikedPlaylists(ctx context.Context) (*models.Response[[]library.LibraryPlaylists], error) <span class="cov0" title="0">{
+        return getSection[[]library.LibraryPlaylists](s, ctx, library.SectionPlaylists, library.SectionTypeLikes)
+}</span>
+
+// Disliked entities
+func (s *LibraryService) DislikedTracks(ctx context.Context) (*models.Response[library.LibraryTracks], error) <span class="cov0" title="0">{
+        return getSection[library.LibraryTracks](s, ctx, library.SectionTracks, library.SectionTypeDislikes)
+}</span>
+func (s *LibraryService) DislikedArtists(ctx context.Context) (*models.Response[[]any], error) <span class="cov0" title="0">{
+        return getSection[[]any](s, ctx, library.SectionArtists, library.SectionTypeDislikes)
+}</span>
+
+// modify helper: POST users/{uid}/{type}/{section}/add-multiple or /remove with form field &lt;singular&gt;-ids
+func (s *LibraryService) modifyForm(ctx context.Context, section library.Section, typ library.SectionType, add bool, id string) (*http.Response, error) <span class="cov0" title="0">{
+        p, err := s.sectionPath(section, typ)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">action := "remove"
+        if add </span><span class="cov0" title="0">{
+                action = "add-multiple"
+        }</span>
+        <span class="cov0" title="0">p = path.Join(p, action)
+        form := url.Values{}
+        singular := strings.TrimSuffix(string(section), "s")
+        form.Set(singular+"-ids", id)
+        req, err := s.c.newRequest(ctx, http.MethodPost, p, nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">encoded := form.Encode()
+        req.Body = io.NopCloser(strings.NewReader(encoded))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        return s.c.http.Do(req)</span>
+}
+
+// Likes/dislikes operations
+// AddTrackLike returns resulting playlist (C# returns YPlaylist)
+func (s *LibraryService) AddTrackLike(ctx context.Context, trackKey string) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionTracks, library.SectionTypeLikes, true, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("add track like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[playlist.Playlist]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) RemoveTrackLike(ctx context.Context, trackKey string) (*models.Response[models.Revision], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionTracks, library.SectionTypeLikes, false, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("remove track like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[models.Revision]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) AddTrackDislike(ctx context.Context, trackKey string) (*models.Response[models.Revision], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionTracks, library.SectionTypeDislikes, true, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("add track dislike failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[models.Revision]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) RemoveTrackDislike(ctx context.Context, trackKey string) (*models.Response[models.Revision], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionTracks, library.SectionTypeDislikes, false, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("remove track dislike failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[models.Revision]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) AddAlbumLike(ctx context.Context, albumID string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionAlbums, library.SectionTypeLikes, true, albumID)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("add album like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) RemoveAlbumLike(ctx context.Context, albumID string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionAlbums, library.SectionTypeLikes, false, albumID)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("remove album like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) AddArtistLike(ctx context.Context, artistID string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionArtists, library.SectionTypeLikes, true, artistID)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("add artist like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) RemoveArtistLike(ctx context.Context, artistID string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionArtists, library.SectionTypeLikes, false, artistID)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("remove artist like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) AddPlaylistLike(ctx context.Context, playlistKey string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionPlaylists, library.SectionTypeLikes, true, playlistKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("add playlist like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+func (s *LibraryService) RemovePlaylistLike(ctx context.Context, playlistKey string) (*models.Response[string], error) <span class="cov0" title="0">{
+        resp, err := s.modifyForm(ctx, library.SectionPlaylists, library.SectionTypeLikes, false, playlistKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("remove playlist like failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// RecentlyListened mirrors GetRecentlyListenedAsync
+func (s *LibraryService) RecentlyListened(ctx context.Context, types []library.PlayContextType, trackCount, contextCount int) (*models.Response[library.RecentlyListenedContext], error) <span class="cov0" title="0">{
+        if s.c.auth == nil || s.c.auth.User == nil || s.c.auth.User.Uid == "" </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("user uid not set")
+        }</span>
+        <span class="cov0" title="0">p := path.Join("users", s.c.auth.User.Uid, "contexts")
+        q := url.Values{}
+        q.Set("trackCount", fmt.Sprintf("%d", trackCount))
+        q.Set("contextCount", fmt.Sprintf("%d", contextCount))
+        parts := make([]string, len(types))
+        for i, t := range types </span><span class="cov0" title="0">{
+                parts[i] = string(t)
+        }</span>
+        <span class="cov0" title="0">q.Set("types", strings.Join(parts, ","))
+        return doJSON[library.RecentlyListenedContext](s.c, ctx, http.MethodGet, p, q, nil)</span>
+}
+
+// doForm is like doJSON but sends form data.
+func doForm[T any](c *Client, ctx context.Context, p string, form url.Values) (*models.Response[T], error) <span class="cov0" title="0">{
+        req, err := c.newRequest(ctx, http.MethodPost, p, nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">encoded := form.Encode()
+        req.Body = io.NopCloser(strings.NewReader(encoded))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        resp, err := c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("form post failed: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[T]
+        dec := json.NewDecoder(resp.Body)
+        if err := dec.Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package client
+
+import (
+        "net/http"
+
+        "github.com/Banjirome/yandex-music-go/auth"
+)
+
+type Option func(*Config)
+
+type Config struct {
+        BaseURL            string
+        HTTPClient         *http.Client
+        UserAgent          string
+        AuthStorage        *auth.Storage
+        ClientID           string
+        ClientSecret       string
+        XClientID          string
+        XClientSecret      string
+        MobileProxyBaseURL string
+}
+
+func defaultConfig() Config <span class="cov8" title="1">{
+        return Config{
+                BaseURL:   "https://api.music.yandex.net/",
+                UserAgent: "yandex-music-go/0.1.0",
+        }
+}</span>
+
+func WithHTTPClient(h *http.Client) Option <span class="cov0" title="0">{ return func(c *Config) </span><span class="cov0" title="0">{ c.HTTPClient = h }</span> }
+func WithBaseURL(u string) Option          <span class="cov8" title="1">{ return func(c *Config) </span><span class="cov8" title="1">{ c.BaseURL = u }</span> }
+func WithUserAgent(ua string) Option       <span class="cov0" title="0">{ return func(c *Config) </span><span class="cov0" title="0">{ c.UserAgent = ua }</span> }
+func WithToken(token string) Option <span class="cov0" title="0">{
+        return func(c *Config) </span><span class="cov0" title="0">{
+                if c.AuthStorage == nil </span><span class="cov0" title="0">{
+                        c.AuthStorage = auth.New(token)
+                }</span> else<span class="cov0" title="0"> {
+                        c.AuthStorage.Token = token
+                }</span>
+        }
+}
+func WithAuthStorage(s *auth.Storage) Option <span class="cov8" title="1">{ return func(c *Config) </span><span class="cov8" title="1">{ c.AuthStorage = s }</span> }
+func WithClientCredentials(id, secret string) Option <span class="cov0" title="0">{
+        return func(c *Config) </span><span class="cov0" title="0">{ c.ClientID, c.ClientSecret = id, secret }</span>
+}
+func WithXClientCredentials(id, secret string) Option <span class="cov0" title="0">{
+        return func(c *Config) </span><span class="cov0" title="0">{ c.XClientID, c.XClientSecret = id, secret }</span>
+}
+func WithMobileProxyBaseURL(u string) Option <span class="cov0" title="0">{ return func(c *Config) </span><span class="cov0" title="0">{ c.MobileProxyBaseURL = u }</span> }
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package client
+
+import (
+        "bytes"
+        "context"
+        "encoding/json"
+        "errors"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "strconv"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/playlist"
+)
+
+// PlaylistService реализует операции над плейлистами с путями users/{uid}/playlists/{kind}.
+type PlaylistService struct{ c *Client }
+
+// GetPersonalPlaylists загружает персональные плейлисты через Landing personal-playlists блок.
+func (s *PlaylistService) GetPersonalPlaylists(ctx context.Context) ([]*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        land, err := s.c.Landing.Get(ctx, "personal-playlists")
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var out []*models.Response[playlist.Playlist]
+        for _, b := range land.Result.Blocks </span><span class="cov0" title="0">{
+                if strings.ToLower(b.Type) != "personal-playlists" </span><span class="cov0" title="0">{
+                        continue</span>
+                }
+                <span class="cov0" title="0">for _, ent := range b.Entities </span><span class="cov0" title="0">{
+                        // entity expected to contain nested playlist under key "data" -&gt; "data"
+                        if plMap, ok := ent["data"].(map[string]any); ok </span><span class="cov0" title="0">{
+                                if inner, ok2 := plMap["data"].(map[string]any); ok2 </span><span class="cov0" title="0">{
+                                        // marshal/unmarshal to Playlist
+                                        raw, _ := json.Marshal(inner)
+                                        var pl playlist.Playlist
+                                        if err := json.Unmarshal(raw, &amp;pl); err == nil </span><span class="cov0" title="0">{
+                                                cpy := pl // avoid pointer alias issues
+                                                out = append(out, &amp;models.Response[playlist.Playlist]{Result: cpy})
+                                        }</span>
+                                }
+                        }
+                }
+        }
+        <span class="cov0" title="0">return out, nil</span>
+}
+
+func (s *PlaylistService) personalByType(ctx context.Context, typ string) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        list, err := s.GetPersonalPlaylists(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">for _, r := range list </span><span class="cov0" title="0">{
+                if r != nil &amp;&amp; strings.EqualFold(r.Result.GeneratedPlaylistType, typ) </span><span class="cov0" title="0">{
+                        return r, nil
+                }</span>
+        }
+        <span class="cov0" title="0">return nil, errors.New("personal playlist not found")</span>
+}
+
+func (s *PlaylistService) OfTheDay(ctx context.Context) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        return s.personalByType(ctx, playlist.GeneratedPlaylistOfTheDay)
+}</span>
+func (s *PlaylistService) DejaVu(ctx context.Context) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        return s.personalByType(ctx, playlist.GeneratedPlaylistNeverHeard)
+}</span>
+func (s *PlaylistService) Premiere(ctx context.Context) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        return s.personalByType(ctx, playlist.GeneratedPlaylistRecent)
+}</span>
+func (s *PlaylistService) Missed(ctx context.Context) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        return s.personalByType(ctx, playlist.GeneratedPlaylistMissed)
+}</span>
+func (s *PlaylistService) Kinopoisk(ctx context.Context) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        return s.personalByType(ctx, playlist.GeneratedPlaylistKinopoisk)
+}</span>
+
+// Get получает плейлист по владельцу и kind.
+func (s *PlaylistService) Get(ctx context.Context, userUID, kind string) (*models.Response[playlist.Playlist], error) <span class="cov8" title="1">{
+        p := path.Join("users", userUID, "playlists", kind)
+        return doJSON[playlist.Playlist](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// GetByUUID получает плейлист по uuid.
+func (s *PlaylistService) GetByUUID(ctx context.Context, uuid string) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        p := path.Join("playlists", uuid)
+        return doJSON[playlist.Playlist](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// GetMany получает несколько плейлистов (последовательно).
+func (s *PlaylistService) GetMany(ctx context.Context, pairs [][2]string) ([]*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        out := make([]*models.Response[playlist.Playlist], 0, len(pairs))
+        for _, pr := range pairs </span><span class="cov0" title="0">{
+                r, err := s.Get(ctx, pr[0], pr[1])
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">out = append(out, r)</span>
+        }
+        <span class="cov0" title="0">return out, nil</span>
+}
+
+// Create создаёт плейлист.
+func (s *PlaylistService) Create(ctx context.Context, userUID, name string) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        form := url.Values{}
+        form.Set("title", name)
+        form.Set("visibility", "public")
+        p := path.Join("users", userUID, "playlists", "create")
+        return s.postFormPlaylist(ctx, p, form)
+}</span>
+
+// Rename переименовывает плейлист.
+func (s *PlaylistService) Rename(ctx context.Context, userUID, kind, name string) (*models.Response[playlist.Playlist], error) <span class="cov0" title="0">{
+        form := url.Values{}
+        form.Set("value", name)
+        p := path.Join("users", userUID, "playlists", kind, "name")
+        return s.postFormPlaylist(ctx, p, form)
+}</span>
+
+// Delete удаляет плейлист.
+func (s *PlaylistService) Delete(ctx context.Context, userUID, kind string) error <span class="cov0" title="0">{
+        // C# удаление: POST users/{uid}/playlists/{kind}/delete
+        p := path.Join("users", userUID, "playlists", kind, "delete")
+        form := url.Values{}
+        resp, err := s.postForm(ctx, p, form)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return fmt.Errorf("delete playlist: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+
+// InsertTracks вставляет треки в начало.
+func (s *PlaylistService) InsertTracks(ctx context.Context, pl *playlist.Playlist, trackIDs []playlist.TrackKey) (*models.Response[playlist.Playlist], error) <span class="cov8" title="1">{
+        change := playlist.ChangeRequest{Operation: "insert", At: 0, Tracks: trackIDs}
+        resp, err := s.applyChanges(ctx, pl, []playlist.ChangeRequest{change})
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+        // обновим локальную ревизию перед повторным чтением (как C# делает повторный Get)
+        <span class="cov8" title="1">pl.Revision = resp.Result.Revision
+        return s.Get(ctx, pl.Owner.Uid, pl.Kind)</span>
+}
+
+// DeleteTracks удаляет указанные треки (определяются по ID, берутся уникально).
+func (s *PlaylistService) DeleteTracks(ctx context.Context, pl *playlist.Playlist, tracks []playlist.Track) (*models.Response[playlist.Playlist], error) <span class="cov8" title="1">{
+        if pl == nil </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("playlist nil")
+        }</span>
+        <span class="cov8" title="1">if len(tracks) == 0 </span><span class="cov8" title="1">{
+                return s.Get(ctx, pl.Owner.Uid, pl.Kind)
+        }</span>
+        // map id -&gt; struct{} for uniqueness
+        <span class="cov8" title="1">uniq := make(map[string]struct{})
+        for _, t := range tracks </span><span class="cov8" title="1">{
+                if t.ID != "" </span><span class="cov8" title="1">{
+                        uniq[t.ID] = struct{}{}
+                }</span>
+        }
+        <span class="cov8" title="1">changes := make([]playlist.ChangeRequest, 0, len(uniq))
+        // Build index map of playlist current tracks
+        for idx, cont := range pl.Tracks </span><span class="cov8" title="1">{
+                if cont.Track == nil </span><span class="cov0" title="0">{
+                        continue</span>
+                }
+                <span class="cov8" title="1">if _, ok := uniq[cont.Track.ID]; ok </span><span class="cov8" title="1">{
+                        // construct key
+                        key := playlist.TrackKey{Id: cont.Track.ID}
+                        if len(cont.Track.Albums) &gt; 0 </span><span class="cov8" title="1">{
+                                key.AlbumId = cont.Track.Albums[0].ID
+                        }</span>
+                        <span class="cov8" title="1">changes = append(changes, playlist.ChangeRequest{Operation: "delete", From: idx, To: idx + 1, Tracks: []playlist.TrackKey{key}})</span>
+                }
+        }
+        <span class="cov8" title="1">if len(changes) == 0 </span><span class="cov0" title="0">{
+                return s.Get(ctx, pl.Owner.Uid, pl.Kind)
+        }</span>
+        <span class="cov8" title="1">resp, err := s.applyChanges(ctx, pl, changes)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">pl.Revision = resp.Result.Revision
+        return resp, nil</span>
+}
+
+// (RemoveTracks / Personal stub удалены для строгого паритета с C# реализацией)
+
+// Favorites соответствует GET users/{uid}/playlists/list
+func (s *PlaylistService) Favorites(ctx context.Context, userUID string) (*models.Response[[]playlist.Playlist], error) <span class="cov0" title="0">{
+        type wrap = []playlist.Playlist
+        p := path.Join("users", userUID, "playlists", "list")
+        return doJSON[wrap](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// GetBatch соответствует POST playlists/list
+func (s *PlaylistService) GetBatch(ctx context.Context, pairs [][2]string) (*models.Response[[]playlist.Playlist], error) <span class="cov8" title="1">{
+        ids := make([]string, 0, len(pairs))
+        for _, pr := range pairs </span><span class="cov8" title="1">{
+                ids = append(ids, pr[0]+":"+pr[1])
+        }</span>
+        <span class="cov8" title="1">form := url.Values{}
+        form.Set("playlist-ids", strings.Join(ids, ","))
+        resp, err := s.postForm(ctx, "playlists/list", form)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("get playlists: %s", resp.Status)
+        }</span>
+        <span class="cov8" title="1">data, _ := io.ReadAll(resp.Body)
+        var out models.Response[[]playlist.Playlist]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">return &amp;out, nil</span>
+}
+
+// applyChanges реализует POST users/{uid}/playlists/{kind}/change с diff.
+func (s *PlaylistService) applyChanges(ctx context.Context, pl *playlist.Playlist, changes []playlist.ChangeRequest) (*models.Response[playlist.Playlist], error) <span class="cov8" title="1">{
+        p := path.Join("users", pl.Owner.Uid, "playlists", pl.Kind, "change")
+        diffJSON, _ := json.Marshal(changes)
+        form := url.Values{}
+        form.Set("kind", pl.Kind)
+        form.Set("revision", strconv.Itoa(pl.Revision))
+        form.Set("diff", string(diffJSON))
+        return s.postFormPlaylist(ctx, p, form)
+}</span>
+
+func (s *PlaylistService) postFormPlaylist(ctx context.Context, p string, form url.Values) (*models.Response[playlist.Playlist], error) <span class="cov8" title="1">{
+        resp, err := s.postForm(ctx, p, form)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+        data, _ := io.ReadAll(resp.Body)
+        if resp.StatusCode &gt;= 400 </span><span class="cov8" title="1">{
+                // Конфликт ревизии: 409 или тело содержит ключевые слова — возвращаем обычную ошибку (без отдельного sentinel).
+                lower := strings.ToLower(string(data))
+                if resp.StatusCode == http.StatusConflict || (strings.Contains(lower, "revision") &amp;&amp; strings.Contains(lower, "conflict")) </span><span class="cov8" title="1">{
+                        return nil, fmt.Errorf("playlist revision conflict")
+                }</span>
+                <span class="cov0" title="0">return nil, fmt.Errorf("playlist op failed: %s", resp.Status)</span>
+        }
+        <span class="cov8" title="1">var out models.Response[playlist.Playlist]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">return &amp;out, nil</span>
+}
+
+func (s *PlaylistService) postForm(ctx context.Context, p string, form url.Values) (*http.Response, error) <span class="cov8" title="1">{
+        req, err := s.c.newRequest(ctx, http.MethodPost, p, nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">body := form.Encode()
+        req.Body = io.NopCloser(bytes.NewBufferString(body))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        return s.c.http.Do(req)</span>
+}
+
+// join helper (пока не используется)
+func joinIDs(user, kind string) string <span class="cov0" title="0">{ return strings.Join([]string{user, kind}, ":") }</span>
+
+// SnapshotOptionalQuery пример хелпера
+func SnapshotOptionalQuery(snapshot int) string <span class="cov0" title="0">{ return strconv.Itoa(snapshot) }</span>
+
+// decodeRaw вспомогательный (пока не используется)
+func decodeRaw(data []byte, v any) error <span class="cov0" title="0">{ return json.Unmarshal(data, v) }</span>
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package client
+
+import (
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "strings"
+
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/queue"
+)
+
+// QueueService mirrors YQueueAPI (list, get, create, update-position).
+type QueueService struct{ c *Client }
+
+// List queues: GET queues (optional device header)
+func (s *QueueService) List(ctx context.Context, device string) (*models.Response[queue.QueueItemsContainer], error) <span class="cov0" title="0">{
+        req, err := s.c.newRequest(ctx, http.MethodGet, "queues", nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if device != "" </span><span class="cov0" title="0">{
+                req.Header.Set("X-Yandex-Music-Device", device)
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("queues list: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[queue.QueueItemsContainer]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// Get queue: GET queues/{queueId}
+func (s *QueueService) Get(ctx context.Context, queueID string) (*models.Response[queue.Queue], error) <span class="cov0" title="0">{
+        p := path.Join("queues", queueID)
+        return doJSON[queue.Queue](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// Create queue: POST queues (JSON body) optional device header
+func (s *QueueService) Create(ctx context.Context, q *queue.Queue, device string) (*models.Response[queue.NewQueue], error) <span class="cov0" title="0">{
+        req, err := s.c.newRequest(ctx, http.MethodPost, "queues", nil, q)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if device != "" </span><span class="cov0" title="0">{
+                req.Header.Set("X-Yandex-Music-Device", device)
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 256))
+                return nil, fmt.Errorf("create queue: %s %s", resp.Status, string(b))
+        }</span>
+        <span class="cov0" title="0">var out models.Response[queue.NewQueue]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// UpdatePosition: POST queues/{queueId}/update-position?currentIndex=&amp;isInteractive=
+func (s *QueueService) UpdatePosition(ctx context.Context, queueID string, currentIndex int, isInteractive bool, device string) (*models.Response[queue.UpdatedQueue], error) <span class="cov0" title="0">{
+        p := path.Join("queues", queueID, "update-position")
+        qv := url.Values{}
+        qv.Set("currentIndex", fmt.Sprintf("%d", currentIndex))
+        qv.Set("isInteractive", strings.ToLower(fmt.Sprintf("%v", isInteractive)))
+        req, err := s.c.newRequest(ctx, http.MethodPost, p, qv, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if device != "" </span><span class="cov0" title="0">{
+                req.Header.Set("X-Yandex-Music-Device", device)
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("update position: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[queue.UpdatedQueue]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package client
+
+import (
+        "context"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "path"
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/radio"
+)
+
+type RadioService struct{ c *Client }
+
+// Dashboard: GET rotor/stations/dashboard
+func (s *RadioService) Dashboard(ctx context.Context) (*models.Response[radio.StationsDashboard], error) <span class="cov0" title="0">{
+        return doJSON[radio.StationsDashboard](s.c, ctx, http.MethodGet, "rotor/stations/dashboard", nil, nil)
+}</span>
+
+// List stations: GET rotor/stations/list
+func (s *RadioService) List(ctx context.Context) (*models.Response[[]radio.Station], error) <span class="cov0" title="0">{
+        return doJSON[[]radio.Station](s.c, ctx, http.MethodGet, "rotor/stations/list", nil, nil)
+}</span>
+
+// Station info: GET rotor/station/{type}:{tag}/info
+func (s *RadioService) Station(ctx context.Context, typ, tag string) (*models.Response[[]radio.Station], error) <span class="cov0" title="0">{
+        p := path.Join("rotor/station", fmt.Sprintf("%s:%s", typ, tag), "info")
+        return doJSON[[]radio.Station](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// Tracks sequence: GET rotor/station/{type}:{tag}/tracks?settings2=true[&amp;queue=prevTrackId]
+func (s *RadioService) Tracks(ctx context.Context, station radio.Station, prevTrackID string) (*models.Response[radio.StationSequence], error) <span class="cov0" title="0">{
+        p := path.Join("rotor/station", fmt.Sprintf("%s:%s", station.Station.ID.Type, station.Station.ID.Tag), "tracks")
+        q := url.Values{}
+        q.Set("settings2", "true")
+        if prevTrackID != "" </span><span class="cov0" title="0">{
+                q.Set("queue", prevTrackID)
+        }</span>
+        <span class="cov0" title="0">return doJSON[radio.StationSequence](s.c, ctx, http.MethodGet, p, q, nil)</span>
+}
+
+// Update settings2: POST rotor/station/{type}:{tag}/settings2 (JSON body)
+func (s *RadioService) SetSettings2(ctx context.Context, station radio.Station, settings radio.StationSettings2) (*models.Response[string], error) <span class="cov0" title="0">{
+        p := path.Join("rotor/station", fmt.Sprintf("%s:%s", station.Station.ID.Type, station.Station.ID.Tag), "settings2")
+        return doJSON[string](s.c, ctx, http.MethodPost, p, nil, settings)
+}</span>
+
+// Feedback: POST rotor/station/{type}:{tag}/feedback?batch-id=... JSON body {type, timestamp, from, trackId?, totalPlayedSeconds?}
+func (s *RadioService) Feedback(ctx context.Context, station radio.Station, fbType radio.StationFeedbackType, trackID, batchID string, totalPlayedSeconds float64) error <span class="cov0" title="0">{
+        p := path.Join("rotor/station", fmt.Sprintf("%s:%s", station.Station.ID.Type, station.Station.ID.Tag), "feedback")
+        q := url.Values{}
+        if batchID != "" </span><span class="cov0" title="0">{
+                q.Set("batch-id", batchID)
+        }</span>
+        <span class="cov0" title="0">body := radio.NewFeedbackPayload(fbType, station.Station.IDForFrom, trackID, totalPlayedSeconds, time.Now().Unix())
+        req, err := s.c.newRequest(ctx, http.MethodPost, p, q, body)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 256))
+                return fmt.Errorf("feedback failed: %s %s", resp.Status, string(b))
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">package client
+
+import (
+        "bytes"
+        "context"
+        "crypto/md5"
+        "crypto/sha1"
+        "encoding/json"
+        "errors"
+        "fmt"
+        "io"
+        "math/rand"
+        "net/http"
+        "net/url"
+        "os"
+        "path"
+        "sort"
+        "strings"
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+// --- Track related minimal models (subset) ---
+
+type Track struct {
+        ID         string   `json:"id"`
+        Title      string   `json:"title"`
+        DurationMs int64    `json:"durationMs"`
+        Albums     []Album  `json:"albums,omitempty"`
+        Artists    []Artist `json:"artists,omitempty"`
+        Position   *int     `json:"position,omitempty"`
+}
+
+type Album struct {
+        ID    string `json:"id"`
+        Title string `json:"title"`
+}
+
+type Artist struct {
+        ID   string `json:"id"`
+        Name string `json:"name"`
+}
+
+type TrackDownloadInfo struct {
+        BitrateInKbps   int    `json:"bitrateInKbps"`
+        Codec           string `json:"codec"`
+        Direct          bool   `json:"direct"`
+        DownloadInfoURL string `json:"downloadInfoUrl"`
+        Gain            bool   `json:"gain"`
+        Preview         bool   `json:"preview"`
+}
+
+type StorageDownloadFile struct {
+        Host string `json:"host"`
+        Path string `json:"path"`
+        Ts   string `json:"ts"`
+        S    string `json:"s"`
+}
+
+type TrackSupplement struct { /* placeholder for extended data */
+}
+
+type TrackSimilar struct {
+        Tracks []Track `json:"tracks"`
+}
+
+// TrackService mirrors C# YTrackAPI.
+type TrackService struct{ c *Client }
+
+// Get one or many tracks (POST /tracks form: track-ids, with-positions=true)
+func (s *TrackService) Get(ctx context.Context, ids ...string) (*models.Response[[]Track], error) <span class="cov0" title="0">{
+        form := url.Values{}
+        form.Set("track-ids", strings.Join(ids, ","))
+        form.Set("with-positions", "true")
+        resp, err := s.postForm(ctx, "tracks", form)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        data, _ := io.ReadAll(resp.Body)
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("get tracks: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out models.Response[[]Track]
+        if err := json.Unmarshal(data, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// Metadata for download: GET tracks/{trackKey}/download-info?direct=&lt;bool&gt;
+func (s *TrackService) DownloadMetadata(ctx context.Context, trackKey string, direct bool) (*models.Response[[]TrackDownloadInfo], error) <span class="cov8" title="1">{
+        q := url.Values{}
+        q.Set("direct", fmt.Sprintf("%t", direct))
+        p := path.Join("tracks", trackKey, "download-info")
+        return doJSON[[]TrackDownloadInfo](s.c, ctx, http.MethodGet, p, q, nil)
+}</span>
+
+// DownloadMetadataTrack перегрузка по объекту Track.
+func (s *TrackService) DownloadMetadataTrack(ctx context.Context, t Track, direct bool) (*models.Response[[]TrackDownloadInfo], error) <span class="cov0" title="0">{
+        key := t.ID
+        if len(t.Albums) &gt; 0 </span><span class="cov0" title="0">{
+                key = fmt.Sprintf("%s:%s", t.ID, t.Albums[0].ID)
+        }</span>
+        <span class="cov0" title="0">return s.DownloadMetadata(ctx, key, direct)</span>
+}
+
+// Download file info: GET &lt;downloadInfoUrl&gt; (absolute) returns StorageDownloadFile
+func (s *TrackService) DownloadFileInfo(ctx context.Context, downloadInfoURL string) (*StorageDownloadFile, error) <span class="cov8" title="1">{
+        req, err := http.NewRequestWithContext(ctx, http.MethodGet, downloadInfoURL, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("download file info: %s", resp.Status)
+        }</span>
+        <span class="cov8" title="1">var out StorageDownloadFile
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">return &amp;out, nil</span>
+}
+
+// BuildFileLink reproduces C# BuildLinkForDownload algorithm.
+func (s *TrackService) BuildFileLink(meta TrackDownloadInfo, file StorageDownloadFile) (string, error) <span class="cov8" title="1">{
+        if file.Path == "" || file.Host == "" || file.Ts == "" || file.S == "" </span><span class="cov0" title="0">{
+                return "", errors.New("incomplete storage file info")
+        }</span>
+        <span class="cov8" title="1">secret := "XGRlBW9FXlekgbPrRHuSiA" + file.Path[1:] + file.S
+        md5sum := md5Hash([]byte(secret))
+        sign := sha1Hex(md5sum)
+        return fmt.Sprintf("https://%s/get-%s/%s/%s%s", file.Host, meta.Codec, sign, file.Ts, file.Path), nil</span>
+}
+
+// FileLink shortcut: choose best mp3 bitrate.
+func (s *TrackService) FileLink(ctx context.Context, trackKey string) (string, error) <span class="cov8" title="1">{
+        metaResp, err := s.DownloadMetadata(ctx, trackKey, false)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">list := metaResp.Result
+        if len(list) == 0 </span><span class="cov0" title="0">{
+                return "", errors.New("empty metadata list")
+        }</span>
+        <span class="cov8" title="1">sort.Slice(list, func(i, j int) bool </span><span class="cov8" title="1">{ return list[i].BitrateInKbps &gt; list[j].BitrateInKbps }</span>)
+        <span class="cov8" title="1">var chosen *TrackDownloadInfo
+        for i := range list </span><span class="cov8" title="1">{
+                if list[i].Codec == "mp3" </span><span class="cov8" title="1">{
+                        chosen = &amp;list[i]
+                        break</span>
+                }
+        }
+        <span class="cov8" title="1">if chosen == nil </span><span class="cov0" title="0">{
+                chosen = &amp;list[0]
+        }</span>
+        <span class="cov8" title="1">fileInfo, err := s.DownloadFileInfo(ctx, chosen.DownloadInfoURL)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">return s.BuildFileLink(*chosen, *fileInfo)</span>
+}
+
+// FileLinkTrack перегрузка по объекту Track.
+func (s *TrackService) FileLinkTrack(ctx context.Context, t Track) (string, error) <span class="cov0" title="0">{
+        key := t.ID
+        if len(t.Albums) &gt; 0 </span><span class="cov0" title="0">{
+                key = fmt.Sprintf("%s:%s", t.ID, t.Albums[0].ID)
+        }</span>
+        <span class="cov0" title="0">return s.FileLink(ctx, key)</span>
+}
+
+// Supplement: GET tracks/{id}/supplement
+func (s *TrackService) Supplement(ctx context.Context, trackID string) (*models.Response[TrackSupplement], error) <span class="cov0" title="0">{
+        p := path.Join("tracks", trackID, "supplement")
+        return doJSON[TrackSupplement](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// SupplementTrack перегрузка по объекту Track.
+func (s *TrackService) SupplementTrack(ctx context.Context, t Track) (*models.Response[TrackSupplement], error) <span class="cov0" title="0">{
+        return s.Supplement(ctx, t.ID)
+}</span>
+
+// Similar: GET tracks/{id}/similar
+func (s *TrackService) Similar(ctx context.Context, trackID string) (*models.Response[TrackSimilar], error) <span class="cov0" title="0">{
+        p := path.Join("tracks", trackID, "similar")
+        return doJSON[TrackSimilar](s.c, ctx, http.MethodGet, p, nil, nil)
+}</span>
+
+// SimilarTrack перегрузка по объекту Track.
+func (s *TrackService) SimilarTrack(ctx context.Context, t Track) (*models.Response[TrackSimilar], error) <span class="cov0" title="0">{
+        return s.Similar(ctx, t.ID)
+}</span>
+
+// SendPlayInfo: POST play-audio form encoded.
+func (s *TrackService) SendPlayInfo(ctx context.Context, track Track, from, playID, playlistID string, fromCache bool, totalPlayed, endPos float64) error <span class="cov8" title="1">{
+        form := url.Values{}
+        form.Set("track_id", track.ID)
+        form.Set("from-cache", fmt.Sprintf("%t", fromCache))
+        if strings.TrimSpace(playID) == "" </span><span class="cov8" title="1">{
+                playID = fmt.Sprintf("%d-%d-%d", rand.Intn(1000), rand.Intn(1000), rand.Intn(1000))
+        }</span>
+        <span class="cov8" title="1">form.Set("play_id", playID)
+        if s.c.auth == nil || s.c.auth.User == nil || s.c.auth.User.Uid == "" </span><span class="cov8" title="1">{
+                return errors.New("send play info: unauthorized (missing user uid)")
+        }</span>
+        <span class="cov8" title="1">form.Set("uid", s.c.auth.User.Uid)
+        now := time.Now().UTC().Format(time.RFC3339Nano)
+        form.Set("timestamp", now)
+        form.Set("client-now", now)
+        if len(track.Albums) &gt; 0 </span><span class="cov8" title="1">{
+                form.Set("album-id", track.Albums[0].ID)
+        }</span>
+        <span class="cov8" title="1">form.Set("from", from)
+        form.Set("playlist-id", playlistID)
+        form.Set("track-length-seconds", fmt.Sprintf("%d", track.DurationMs/1000))
+        form.Set("total-played-seconds", fmt.Sprintf("%.3f", totalPlayed))
+        form.Set("end-position-seconds", fmt.Sprintf("%.3f", endPos))
+        resp, err := s.postForm(ctx, "play-audio", form)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 256))
+                return fmt.Errorf("play-audio failed: %s %s", resp.Status, string(b))
+        }</span>
+        <span class="cov8" title="1">return nil</span>
+}
+
+// Helpers
+func (s *TrackService) postForm(ctx context.Context, p string, form url.Values) (*http.Response, error) <span class="cov8" title="1">{
+        req, err := s.c.newRequest(ctx, http.MethodPost, p, nil, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">encoded := form.Encode()
+        req.Body = io.NopCloser(bytes.NewBufferString(encoded))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        return s.c.http.Do(req)</span>
+}
+
+// ExtractData downloads full binary content for provided trackKey using best FileLink selection.
+func (s *TrackService) ExtractData(ctx context.Context, trackKey string) ([]byte, error) <span class="cov0" title="0">{
+        link, err := s.FileLink(ctx, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">req, err := http.NewRequestWithContext(ctx, http.MethodGet, link, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("extract data: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">return io.ReadAll(resp.Body)</span>
+}
+
+// ExtractDataTrack перегрузка по объекту Track.
+func (s *TrackService) ExtractDataTrack(ctx context.Context, t Track) ([]byte, error) <span class="cov0" title="0">{
+        key := t.ID
+        if len(t.Albums) &gt; 0 </span><span class="cov0" title="0">{
+                key = fmt.Sprintf("%s:%s", t.ID, t.Albums[0].ID)
+        }</span>
+        <span class="cov0" title="0">return s.ExtractData(ctx, key)</span>
+}
+
+// ExtractStream returns a ReadCloser for streaming track data; caller must Close.
+func (s *TrackService) ExtractStream(ctx context.Context, trackKey string) (io.ReadCloser, error) <span class="cov0" title="0">{
+        link, err := s.FileLink(ctx, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">req, err := http.NewRequestWithContext(ctx, http.MethodGet, link, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                defer resp.Body.Close()
+                return nil, fmt.Errorf("extract stream: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">return resp.Body, nil</span>
+}
+
+// ExtractStreamTrack перегрузка по объекту Track.
+func (s *TrackService) ExtractStreamTrack(ctx context.Context, t Track) (io.ReadCloser, error) <span class="cov0" title="0">{
+        key := t.ID
+        if len(t.Albums) &gt; 0 </span><span class="cov0" title="0">{
+                key = fmt.Sprintf("%s:%s", t.ID, t.Albums[0].ID)
+        }</span>
+        <span class="cov0" title="0">return s.ExtractStream(ctx, key)</span>
+}
+
+// ExtractToFile downloads track into a file path.
+func (s *TrackService) ExtractToFile(ctx context.Context, trackKey, filePath string) error <span class="cov0" title="0">{
+        data, err := s.ExtractData(ctx, trackKey)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return os.WriteFile(filePath, data, 0o644)</span>
+}
+
+// ExtractToFileTrack перегрузка по объекту Track.
+func (s *TrackService) ExtractToFileTrack(ctx context.Context, t Track, filePath string) error <span class="cov0" title="0">{
+        key := t.ID
+        if len(t.Albums) &gt; 0 </span><span class="cov0" title="0">{
+                key = fmt.Sprintf("%s:%s", t.ID, t.Albums[0].ID)
+        }</span>
+        <span class="cov0" title="0">return s.ExtractToFile(ctx, key, filePath)</span>
+}
+
+// crypto helpers
+func md5Hash(b []byte) []byte <span class="cov8" title="1">{ h := md5.New(); h.Write(b); return h.Sum(nil) }</span>
+func sha1Hex(b []byte) string <span class="cov8" title="1">{ h := sha1.New(); h.Write(b); return fmt.Sprintf("%x", h.Sum(nil)) }</span>
+
+// end of file
+</pre>
+		
+		<pre class="file" id="file15" style="display: none">package client
+
+import (
+        "bytes"
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "math/rand"
+        "mime/multipart"
+        "net/http"
+        "net/url"
+        "path"
+        "strconv"
+
+        "github.com/Banjirome/yandex-music-go/models"
+        "github.com/Banjirome/yandex-music-go/playlist"
+        "github.com/Banjirome/yandex-music-go/ugc"
+)
+
+// UgcService реализует операции загрузки пользовательских треков.
+type UgcService struct{ c *Client }
+
+// GetUploadLink: GET handlers/ugc-upload.jsx
+func (s *UgcService) GetUploadLink(ctx context.Context, pl *playlist.Playlist, fileName string) (*ugc.Upload, error) <span class="cov0" title="0">{
+        if pl == nil </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("playlist is nil")
+        }</span>
+        <span class="cov0" title="0">q := url.Values{}
+        q.Set("filename", fileName)
+        q.Set("kind", pl.Kind)
+        q.Set("visibility", "private")
+        q.Set("external-domain", "music.yandex.ru")
+        q.Set("ncrnd", strconv.FormatFloat(rand.Float64(), 'f', 16, 64))
+        req, err := s.c.newRequest(ctx, http.MethodGet, path.Join("handlers", "ugc-upload.jsx"), q, nil)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("get upload link: %s", resp.Status)
+        }</span>
+        <span class="cov0" title="0">var out ugc.Upload
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// UploadBytes: POST &lt;post-target&gt; multipart/form-data with field "file".
+func (s *UgcService) UploadBytes(ctx context.Context, upload *ugc.Upload, data []byte) (*models.Response[string], error) <span class="cov0" title="0">{
+        if upload == nil </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("upload link nil")
+        }</span>
+        <span class="cov0" title="0">body := &amp;bytes.Buffer{}
+        mw := multipart.NewWriter(body)
+        part, err := mw.CreateFormFile("file", "upload.bin")
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if _, err = part.Write(data); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">_ = mw.Close()
+        req, err := http.NewRequestWithContext(ctx, http.MethodPost, upload.PostTarget, body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">req.Header.Set("Content-Type", mw.FormDataContentType())
+        if s.c.auth.Token != "" </span><span class="cov0" title="0">{
+                req.Header.Set("Authorization", "OAuth "+s.c.auth.Token)
+        }</span>
+        <span class="cov0" title="0">if s.c.cfg.UserAgent != "" </span><span class="cov0" title="0">{
+                req.Header.Set("User-Agent", s.c.cfg.UserAgent)
+        }</span>
+        <span class="cov0" title="0">resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 256))
+                return nil, fmt.Errorf("upload ugc: %s %s", resp.Status, string(b))
+        }</span>
+        <span class="cov0" title="0">var out models.Response[string]
+        if err := json.NewDecoder(resp.Body).Decode(&amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;out, nil</span>
+}
+
+// Используем math/rand.Float64 для паритета с Random.NextDouble.
+</pre>
+		
+		<pre class="file" id="file16" style="display: none">package client
+
+import (
+        "context"
+        "encoding/json"
+        "errors"
+        "fmt"
+        "io"
+        "net/http"
+        "net/url"
+        "regexp"
+        "strings"
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/auth"
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+// UserService: минимальный набор: валидация токена и получение account/status.
+type UserService struct{ c *Client }
+
+// Authorize устанавливает токен и проверяет его валидность через GetUserAuth.
+func (s *UserService) Authorize(ctx context.Context, token string) error <span class="cov0" title="0">{
+        if token == "" </span><span class="cov0" title="0">{
+                return fmt.Errorf("empty token")
+        }</span>
+        <span class="cov0" title="0">s.c.auth.Token = token
+        info, err := s.GetUserAuth(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">if info == nil || info.Result.Account.Uid == "" </span><span class="cov0" title="0">{
+                return fmt.Errorf("unauthorized")
+        }</span>
+        // persist minimal user info in storage for parity (Uid, Login, IsAuthorized flag)
+        <span class="cov0" title="0">s.c.auth.SetUid(info.Result.Account.Uid)
+        s.c.auth.SetLogin(info.Result.Account.Login)
+        s.c.auth.IsAuthorized = true
+        return nil</span>
+}
+
+// GetUserAuth запрашивает account/status.
+func (s *UserService) GetUserAuth(ctx context.Context) (*models.Response[UserAuthResult], error) <span class="cov0" title="0">{
+        return doJSON[UserAuthResult](s.c, ctx, http.MethodGet, "account/status", nil, nil)
+}</span>
+
+// UserAuthResult минимальная модель ответа account/status.
+type UserAuthResult struct {
+        Account struct {
+                Uid   string `json:"uid"`
+                Login string `json:"login"`
+        } `json:"account"`
+}
+
+// --- Расширенные методы авторизации (упрощённая адаптация C#) ---
+
+// CreateAuthSession инициирует сессию и получает доступные методы.
+func (s *UserService) CreateAuthSession(ctx context.Context, login string) (*models.Response[models.AuthTypes], error) <span class="cov0" title="0">{
+        if login == "" </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("login empty")
+        }</span>
+        <span class="cov0" title="0">if err := s.ensureCsrf(ctx); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "login":      login,
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/auth/multi_step/start", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var out models.AuthTypes
+        if err := decodeJSON(resp, &amp;out); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if s.c.auth.AuthToken == nil </span><span class="cov0" title="0">{
+                s.c.auth.AuthToken = &amp;auth.AuthToken{}
+        }</span>
+        <span class="cov0" title="0">s.c.auth.AuthToken.TrackId = out.TrackId
+        return &amp;models.Response[models.AuthTypes]{Result: out}, nil</span>
+}
+
+// GetAuthQRLink получает ссылку на QR-код.
+func (s *UserService) GetAuthQRLink(ctx context.Context) (string, error) <span class="cov0" title="0">{
+        if err := s.ensureCsrf(ctx); err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "retpath":    "https://passport.yandex.ru/profile",
+                "with_code":  "1",
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/auth/password/submit", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov0" title="0">var qr models.AuthQR
+        if err := decodeJSON(resp, &amp;qr); err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov0" title="0">if s.c.auth.AuthToken == nil </span><span class="cov0" title="0">{
+                s.c.auth.AuthToken = &amp;auth.AuthToken{}
+        }</span>
+        <span class="cov0" title="0">s.c.auth.AuthToken.TrackId = qr.TrackId
+        s.c.auth.AuthToken.CsrfToken = qr.CsrfToken
+        if strings.ToLower(qr.Status) != "ok" </span><span class="cov0" title="0">{
+                return "", fmt.Errorf("qr status: %s", qr.Status)
+        }</span>
+        <span class="cov0" title="0">return fmt.Sprintf("https://passport.yandex.ru/auth/magic/code/?track_id=%s", qr.TrackId), nil</span>
+}
+
+// AuthorizeByQR опрашивает статус QR до подтверждения или таймаута.
+func (s *UserService) AuthorizeByQR(ctx context.Context, pollInterval time.Duration, maxWait time.Duration) (*models.AuthQRStatus, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("qr session not started")
+        }</span>
+        <span class="cov0" title="0">deadline := time.Now().Add(maxWait)
+        for </span><span class="cov0" title="0">{
+                body := urlValues(map[string]string{
+                        "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                        "track_id":   s.c.auth.AuthToken.TrackId,
+                })
+                resp, err := s.passportPOST(ctx, "auth/new/magic/status/", body)
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">var st models.AuthQRStatus
+                if err := decodeJSON(resp, &amp;st); err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">if strings.ToLower(st.Status) == "ok" &amp;&amp; st.MagicLinkConfirmed </span><span class="cov0" title="0">{
+                        if err := s.loginByCookies(ctx); err != nil </span><span class="cov0" title="0">{
+                                return nil, err
+                        }</span>
+                        <span class="cov0" title="0">return &amp;st, nil</span>
+                }
+                <span class="cov0" title="0">if time.Now().After(deadline) </span><span class="cov0" title="0">{
+                        return nil, fmt.Errorf("qr timeout: %s", st.Status)
+                }</span>
+                <span class="cov0" title="0">select </span>{
+                case &lt;-ctx.Done():<span class="cov0" title="0">
+                        return nil, ctx.Err()</span>
+                case &lt;-time.After(pollInterval):<span class="cov0" title="0"></span>
+                }
+        }
+}
+
+// GetCaptcha получает captcha.
+func (s *UserService) GetCaptcha(ctx context.Context) (*models.AuthCaptcha, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("session not started")
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "track_id":   s.c.auth.AuthToken.TrackId,
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/textcaptcha", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var cp models.AuthCaptcha
+        if err := decodeJSON(resp, &amp;cp); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;cp, nil</span>
+}
+
+// AuthorizeByCaptcha отправляет ответ на captcha.
+func (s *UserService) AuthorizeByCaptcha(ctx context.Context, answer string) (*models.AuthBase, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("session not started")
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "track_id":   s.c.auth.AuthToken.TrackId,
+                "answer":     answer,
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/checkHuman", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var base models.AuthBase
+        if err := decodeJSON(resp, &amp;base); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;base, nil</span>
+}
+
+// GetAuthLetter запрашивает отправку письма.
+func (s *UserService) GetAuthLetter(ctx context.Context) (*models.AuthLetter, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("session not started")
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "track_id":   s.c.auth.AuthToken.TrackId,
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/auth/send_magic_letter", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var lt models.AuthLetter
+        if err := decodeJSON(resp, &amp;lt); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;lt, nil</span>
+}
+
+// AuthorizeByLetter проверяет статус magic link.
+func (s *UserService) AuthorizeByLetter(ctx context.Context) (*models.AuthLetterStatus, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("session not started")
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "track_id":   s.c.auth.AuthToken.TrackId,
+        })
+        resp, err := s.passportPOST(ctx, "auth/letter/status/", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var st models.AuthLetterStatus
+        if err := decodeJSON(resp, &amp;st); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if strings.ToLower(st.Status) == "ok" &amp;&amp; st.MagicLinkConfirmed </span><span class="cov0" title="0">{
+                if err := s.loginByCookies(ctx); err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+                <span class="cov0" title="0">return &amp;st, nil</span>
+        }
+        <span class="cov0" title="0">return &amp;st, fmt.Errorf("letter status: %s confirmed=%v", st.Status, st.MagicLinkConfirmed)</span>
+}
+
+// AuthorizeByAppPassword завершает вход приложенческим паролем.
+func (s *UserService) AuthorizeByAppPassword(ctx context.Context, password string) (*models.AuthBase, error) <span class="cov0" title="0">{
+        if s.c.auth.AuthToken == nil || s.c.auth.AuthToken.TrackId == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("session not started")
+        }</span>
+        <span class="cov0" title="0">body := urlValues(map[string]string{
+                "csrf_token": s.c.auth.AuthToken.CsrfToken,
+                "track_id":   s.c.auth.AuthToken.TrackId,
+                "password":   password,
+                "retpath":    "https://passport.yandex.ru/am/finish?status=ok&amp;from=Login",
+        })
+        resp, err := s.passportPOST(ctx, "registration-validations/auth/multi_step/commit_password", body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var base models.AuthBase
+        if err := decodeJSON(resp, &amp;base); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if strings.ToLower(base.Status) == "ok" </span><span class="cov0" title="0">{
+                if err := s.loginByCookies(ctx); err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+        }
+        <span class="cov0" title="0">return &amp;base, nil</span>
+}
+
+// GetAccessToken обменивает cookies access token на music token (упрощение: предполагаем storage.AccessToken уже установлен внешне).
+func (s *UserService) GetAccessToken(ctx context.Context) (*auth.AccessToken, error) <span class="cov0" title="0">{
+        if s.c.auth.AccessToken == nil || s.c.auth.AccessToken.AccessToken == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("access token missing")
+        }</span>
+        <span class="cov0" title="0">form := urlValues(map[string]string{
+                "client_id":     s.c.cfg.ClientID,
+                "client_secret": s.c.cfg.ClientSecret,
+                "grant_type":    "x-token",
+                "access_token":  s.c.auth.AccessToken.AccessToken,
+        })
+        resp, err := s.oauthPOST(ctx, "/1/token", form)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var acc auth.AccessToken
+        if err := decodeJSON(resp, &amp;acc); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">s.c.auth.Token = acc.AccessToken
+        return &amp;acc, nil</span>
+}
+
+// loginByCookies выполняет обмен cookies -&gt; access token (sessionid) затем устанавливает storage.AccessToken.
+func (s *UserService) loginByCookies(ctx context.Context) error <span class="cov0" title="0">{
+        // POST mobile proxy endpoint 1/bundle/oauth/token_by_sessionid
+        base := s.c.cfg.MobileProxyBaseURL
+        if base == "" </span><span class="cov0" title="0">{
+                base = "https://mobileproxy.passport.yandex.net/"
+        }</span>
+        <span class="cov0" title="0">endpoint := strings.TrimRight(base, "/") + "/1/bundle/oauth/token_by_sessionid"
+        form := urlValues(map[string]string{
+                "client_id":     s.c.cfg.XClientID,
+                "client_secret": s.c.cfg.XClientSecret,
+        })
+        req, _ := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, strings.NewReader(form))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        // emulate headers similar to C# builder (Ya-Client-*). We approximate cookie aggregation implicitly via Jar.
+        req.Header.Set("Ya-Client-Host", "passport.yandex.ru")
+        resp, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">var acc auth.AccessToken
+        if err := decodeJSON(resp, &amp;acc); err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">if acc.AccessToken == "" </span><span class="cov0" title="0">{
+                return fmt.Errorf("empty access token")
+        }</span>
+        <span class="cov0" title="0">s.c.auth.AccessToken = &amp;acc
+        s.c.auth.Token = acc.AccessToken
+        s.c.auth.IsAuthorized = true
+        return nil</span>
+}
+
+// GetLoginInfo получает базовую login info.
+func (s *UserService) GetLoginInfo(ctx context.Context) (*models.LoginInfo, error) <span class="cov0" title="0">{
+        resp, err := s.loginGET(ctx, "info")
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">var li models.LoginInfo
+        if err := decodeJSON(resp, &amp;li); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;li, nil</span>
+}
+
+// --- Вспомогательные низкоуровневые ---
+var reCsrf = regexp.MustCompile(`"csrf_token" value="([^"]+)"`)
+
+func (s *UserService) ensureCsrf(ctx context.Context) error <span class="cov0" title="0">{
+        if s.c.auth.AuthToken != nil &amp;&amp; s.c.auth.AuthToken.CsrfToken != "" </span><span class="cov0" title="0">{
+                return nil
+        }</span>
+        // GET am (auth methods) to extract csrf
+        <span class="cov0" title="0">req, _ := http.NewRequestWithContext(ctx, http.MethodGet, "https://passport.yandex.ru/am?app_platform=android", nil)
+        r, err := s.c.http.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer r.Body.Close()
+        b, _ := io.ReadAll(r.Body)
+        m := reCsrf.FindSubmatch(b)
+        if len(m) &lt; 2 </span><span class="cov0" title="0">{
+                return fmt.Errorf("csrf not found")
+        }</span>
+        <span class="cov0" title="0">s.c.auth.AuthToken = &amp;auth.AuthToken{CsrfToken: string(m[1])}
+        return nil</span>
+}
+
+func urlValues(kv map[string]string) string <span class="cov0" title="0">{
+        var b strings.Builder
+        first := true
+        for k, v := range kv </span><span class="cov0" title="0">{
+                if !first </span><span class="cov0" title="0">{
+                        b.WriteByte('&amp;')
+                }</span> else<span class="cov0" title="0"> {
+                        first = false
+                }</span>
+                <span class="cov0" title="0">b.WriteString(urlEncode(k))
+                b.WriteByte('=')
+                b.WriteString(urlEncode(v))</span>
+        }
+        <span class="cov0" title="0">return b.String()</span>
+}
+
+func urlEncode(s string) string <span class="cov0" title="0">{ return url.QueryEscape(s) }</span>
+
+func (s *UserService) passportPOST(ctx context.Context, path string, body string) (*http.Response, error) <span class="cov0" title="0">{
+        url := "https://passport.yandex.ru/" + path
+        req, _ := http.NewRequestWithContext(ctx, http.MethodPost, url, strings.NewReader(body))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        return s.c.http.Do(req)
+}</span>
+
+func (s *UserService) oauthPOST(ctx context.Context, path string, body string) (*http.Response, error) <span class="cov0" title="0">{
+        url := "https://oauth.yandex.ru" + path
+        req, _ := http.NewRequestWithContext(ctx, http.MethodPost, url, strings.NewReader(body))
+        req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+        return s.c.http.Do(req)
+}</span>
+
+func (s *UserService) loginGET(ctx context.Context, path string) (*http.Response, error) <span class="cov0" title="0">{
+        url := "https://login.yandex.ru/" + path
+        req, _ := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+        return s.c.http.Do(req)
+}</span>
+
+func decodeJSON(resp *http.Response, v any) error <span class="cov0" title="0">{
+        defer resp.Body.Close()
+        if resp.StatusCode &gt;= 400 </span><span class="cov0" title="0">{
+                b, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+                return fmt.Errorf("http %d: %s", resp.StatusCode, string(b))
+        }</span>
+        <span class="cov0" title="0">dec := json.NewDecoder(resp.Body)
+        return dec.Decode(v)</span>
+}
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">package client
+
+import (
+        "context"
+        "encoding/json"
+        "errors"
+        "fmt"
+        "net/http"
+        "sync"
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/auth"
+        "github.com/Banjirome/yandex-music-go/ynison"
+        "nhooyr.io/websocket"
+)
+
+// YnisonService provides realtime player state via dual websocket (redirector -&gt; state).
+type YnisonService struct {
+        c *Client
+}
+
+// Player represents a connected Ynison player instance.
+type Player struct {
+        cli *Client
+        st  *auth.Storage
+
+        redirectConn *websocket.Conn
+        stateConn    *websocket.Conn
+
+        stateMu sync.RWMutex
+        state   *ynison.State
+
+        OnReceive func(p *Player, s *ynison.State)
+        OnClose   func(p *Player, err error)
+
+        keepAliveCancel context.CancelFunc
+}
+
+// Connect establishes websocket connections and starts read loop.
+func (s *YnisonService) Connect(ctx context.Context) (*Player, error) <span class="cov0" title="0">{
+        if s.c.auth.Token == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("token required")
+        }</span>
+        <span class="cov0" title="0">p := &amp;Player{cli: s.c, st: s.c.auth}
+        if err := p.connect(ctx); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return p, nil</span>
+}
+
+func (p *Player) connect(ctx context.Context) error <span class="cov0" title="0">{
+        // 1. redirector
+        rc, _, err := websocket.Dial(ctx, "wss://ynison.music.yandex.ru/redirector.YnisonRedirectService/GetRedirectToYnison", &amp;websocket.DialOptions{
+                HTTPHeader: p.wsHeaders(""),
+        })
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("redirect dial: %w", err)
+        }</span>
+        <span class="cov0" title="0">p.redirectConn = rc
+        // read single redirect message
+        _, data, err := rc.Read(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("redirect read: %w", err)
+        }</span>
+        <span class="cov0" title="0">var red ynison.Redirect
+        if err := json.Unmarshal(data, &amp;red); err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("redirect decode: %w", err)
+        }</span>
+        // 2. state websocket
+        <span class="cov0" title="0">stateURL := fmt.Sprintf("wss://%s/ynison_state.YnisonStateService/PutYnisonState", red.Host)
+        sc, _, err := websocket.Dial(ctx, stateURL, &amp;websocket.DialOptions{HTTPHeader: p.wsHeaders(red.RedirectTicket)})
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("state dial: %w", err)
+        }</span>
+        <span class="cov0" title="0">p.stateConn = sc
+        // send default state bootstrap
+        if err := p.sendDefaultState(ctx); err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        // start read loop + keepalive if params present
+        <span class="cov0" title="0">go p.readLoop()
+        if red.KeepAlive != nil &amp;&amp; red.KeepAlive.KeepAliveTimeSeconds &gt; 0 </span><span class="cov0" title="0">{
+                ctxKA, cancel := context.WithCancel(context.Background())
+                p.keepAliveCancel = cancel
+                interval := time.Duration(red.KeepAlive.KeepAliveTimeSeconds) * time.Second
+                if interval &gt; 0 </span><span class="cov0" title="0">{
+                        go p.keepAliveLoop(ctxKA, interval)
+                }</span>
+        }
+        <span class="cov0" title="0">return nil</span>
+}
+
+func (p *Player) wsHeaders(ticket string) http.Header <span class="cov0" title="0">{
+        h := http.Header{}
+        h.Set("Origin", "https://music.yandex.ru")
+        h.Set("Authorization", "OAuth "+p.st.Token)
+        protocolMeta := fmt.Sprintf("{\"Ynison-Device-Id\":\"%s\",\"Ynison-Device-Info\":{\"app_name\":\"Chrome\",\"type\":1}}", p.st.DeviceID)
+        if ticket == "" </span><span class="cov0" title="0">{
+                h.Set("Sec-WebSocket-Protocol", "Bearer, v2, "+protocolMeta)
+        }</span> else<span class="cov0" title="0"> {
+                protocolMetaWithTicket := fmt.Sprintf("{\"Ynison-Device-Id\":\"%s\",\"Ynison-Device-Info\":{\"app_name\":\"Chrome\",\"type\":1},\"Ynison-Redirect-Ticket\":\"%s\"}", p.st.DeviceID, ticket)
+                h.Set("Sec-WebSocket-Protocol", "Bearer, v2, "+protocolMetaWithTicket)
+        }</span>
+        <span class="cov0" title="0">return h</span>
+}
+
+func (p *Player) sendDefaultState(ctx context.Context) error <span class="cov0" title="0">{
+        ver := &amp;ynison.Version{DeviceID: p.st.DeviceID, Version: "0", TimestampMs: time.Now().UnixMilli()}
+        bootstrap := map[string]any{
+                "update_full_state": map[string]any{
+                        "player_state": map[string]any{
+                                "player_queue": map[string]any{"version": ver},
+                                "status":       map[string]any{"version": ver},
+                        },
+                        "device": map[string]any{
+                                "capabilities": map[string]any{"can_be_player": true},
+                                "info": map[string]any{
+                                        "device_id":   ver.DeviceID,
+                                        "app_name":    "Yandex Music API Go",
+                                        "app_version": "0.0.1",
+                                        "type":        "WEB",
+                                        "title":       "yandex-music-go",
+                                },
+                                "is_shadow": true,
+                        },
+                },
+                "activity_interception_type": ynison.ActivityDoNotInterceptByDefault,
+                "player_action_timestamp_ms": time.Now().UnixMilli(),
+        }
+        b, _ := json.Marshal(bootstrap)
+        return p.stateConn.Write(ctx, websocket.MessageText, b)
+}</span>
+
+func (p *Player) readLoop() <span class="cov0" title="0">{
+        ctx := context.Background()
+        for </span><span class="cov0" title="0">{
+                _, data, err := p.stateConn.Read(ctx)
+                if err != nil </span><span class="cov0" title="0">{
+                        if p.OnClose != nil </span><span class="cov0" title="0">{
+                                p.OnClose(p, err)
+                        }</span>
+                        <span class="cov0" title="0">return</span>
+                }
+                // try decode error
+                <span class="cov0" title="0">var em ynison.ErrorMessage
+                if err := json.Unmarshal(data, &amp;em); err == nil &amp;&amp; em.Error != nil </span><span class="cov0" title="0">{
+                        if p.OnClose != nil </span><span class="cov0" title="0">{
+                                p.OnClose(p, errors.New(em.Error.Message))
+                        }</span>
+                        <span class="cov0" title="0">return</span>
+                }
+                <span class="cov0" title="0">var st ynison.State
+                if err := json.Unmarshal(data, &amp;st); err == nil &amp;&amp; st.PlayerState != nil </span><span class="cov0" title="0">{
+                        p.stateMu.Lock()
+                        p.state = &amp;st
+                        p.stateMu.Unlock()
+                        if p.OnReceive != nil </span><span class="cov0" title="0">{
+                                p.OnReceive(p, &amp;st)
+                        }</span>
+                }
+        }
+}
+
+// keepAliveLoop sends periodic websocket pings to keep the state connection alive.
+func (p *Player) keepAliveLoop(ctx context.Context, interval time.Duration) <span class="cov0" title="0">{
+        ticker := time.NewTicker(interval)
+        defer ticker.Stop()
+        for </span><span class="cov0" title="0">{
+                select </span>{
+                case &lt;-ctx.Done():<span class="cov0" title="0">
+                        return</span>
+                case &lt;-ticker.C:<span class="cov0" title="0">
+                        if p.stateConn == nil </span><span class="cov0" title="0">{
+                                return
+                        }</span>
+                        <span class="cov0" title="0">_ = p.stateConn.Ping(ctx)</span>
+                }
+        }
+}
+
+// State returns last cached state copy.
+func (p *Player) State() *ynison.State <span class="cov0" title="0">{
+        p.stateMu.RLock()
+        defer p.stateMu.RUnlock()
+        if p.state == nil </span><span class="cov0" title="0">{
+                return nil
+        }</span>
+        <span class="cov0" title="0">cp := *p.state
+        return &amp;cp</span>
+}
+
+// Current returns the current playing track (lazy fetch via Track API) or nil if unavailable.
+func (p *Player) Current(ctx context.Context) (*Track, error) <span class="cov0" title="0">{
+        st := p.State()
+        if st == nil || st.PlayerState == nil || st.PlayerState.PlayerQueue == nil </span><span class="cov0" title="0">{
+                return nil, nil
+        }</span>
+        <span class="cov0" title="0">idx := st.PlayerState.PlayerQueue.CurrentPlayableIndex
+        if idx &lt; 0 || idx &gt;= len(st.PlayerState.PlayerQueue.PlayableList) </span><span class="cov0" title="0">{
+                return nil, nil
+        }</span>
+        <span class="cov0" title="0">playable := st.PlayerState.PlayerQueue.PlayableList[idx]
+        if playable.PlayableID == "" </span><span class="cov0" title="0">{
+                return nil, nil
+        }</span>
+        <span class="cov0" title="0">resp, err := p.cli.Track.Get(ctx, playable.PlayableID)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">if resp == nil || len(resp.Result) == 0 </span><span class="cov0" title="0">{
+                return nil, nil
+        }</span>
+        <span class="cov0" title="0">return &amp;resp.Result[0], nil</span>
+}
+
+// Управляющие методы Next/Previous/Play/Pause/SendRawPlayerState удалены для паритета (в оригинале закомментированы).
+
+// Close terminates connections.
+func (p *Player) Close(ctx context.Context) error <span class="cov0" title="0">{
+        if p.keepAliveCancel != nil </span><span class="cov0" title="0">{
+                p.keepAliveCancel()
+        }</span>
+        <span class="cov0" title="0">if p.stateConn != nil </span><span class="cov0" title="0">{
+                _ = p.stateConn.Close(websocket.StatusNormalClosure, "")
+        }</span>
+        <span class="cov0" title="0">if p.redirectConn != nil </span><span class="cov0" title="0">{
+                _ = p.redirectConn.Close(websocket.StatusNormalClosure, "")
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file18" style="display: none">package main
+
+import (
+        "context"
+        "fmt"
+        "os"
+
+        "github.com/Banjirome/yandex-music-go/client"
+)
+
+// Example simple usage.
+func main() <span class="cov0" title="0">{
+        ctx := context.Background()
+        cli := client.New(client.WithToken(os.Getenv("YANDEX_MUSIC_TOKEN")))
+        resp, err := cli.Search.Tracks(ctx, "Muse Uprising", 0, 5)
+        if err != nil </span><span class="cov0" title="0">{
+                fmt.Println("error:", err)
+                return
+        }</span>
+        <span class="cov0" title="0">if resp.Result.Tracks != nil </span><span class="cov0" title="0">{
+                for _, tr := range resp.Result.Tracks.Results </span><span class="cov0" title="0">{
+                        fmt.Println(tr.Title)
+                }</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file19" style="display: none">package models
+
+// Response универсальная обёртка ответа API.
+type Response[T any] struct {
+        InvocationInfo *InvocationInfo `json:"invocationInfo,omitempty"`
+        Result         T               `json:"result"`
+        Pager          *Pager          `json:"pager,omitempty"`
+}
+
+type InvocationInfo struct {
+        ReqID string `json:"req-id,omitempty"`
+}
+
+type Pager struct {
+        Page    int `json:"page"`
+        PerPage int `json:"perPage"`
+        Total   int `json:"total"`
+}
+
+// Revision represents structure with single revision field (e.g., library track like/dislike operations).
+type Revision struct {
+        Revision int `json:"revision"`
+}
+
+type APIError struct {
+        InvocationInfo *InvocationInfo `json:"invocationInfo,omitempty"`
+        Body           *ErrorBody      `json:"error,omitempty"`
+        StatusCode     int             `json:"-"`
+}
+
+func (e *APIError) Error() string <span class="cov0" title="0">{
+        if e == nil </span><span class="cov0" title="0">{
+                return ""
+        }</span>
+        <span class="cov0" title="0">if e.Body != nil &amp;&amp; e.Body.Message != "" </span><span class="cov0" title="0">{
+                return e.Body.Message
+        }</span>
+        <span class="cov0" title="0">return "yandex music api error"</span>
+}
+
+// ErrorBody returns the underlying API error body (compat alias to C# field name "Error").
+func (e *APIError) ErrorBody() *ErrorBody <span class="cov0" title="0">{
+        if e == nil </span><span class="cov0" title="0">{
+                return nil
+        }</span>
+        <span class="cov0" title="0">return e.Body</span>
+}
+
+type ErrorBody struct {
+        Name    string `json:"name"`
+        Message string `json:"message"`
+}
+</pre>
+		
+		<pre class="file" id="file20" style="display: none">package radio
+
+import (
+        "time"
+
+        "github.com/Banjirome/yandex-music-go/track"
+)
+
+type StationID struct {
+        Tag  string `json:"tag"`
+        Type string `json:"type"`
+}
+
+type StationDescription struct {
+        FullImageURL    string     `json:"fullImageUrl"`
+        Icon            any        `json:"icon"`
+        GeocellIcon     any        `json:"geocellIcon"`
+        ID              StationID  `json:"id"`
+        IDForFrom       string     `json:"idForFrom"`
+        MtsFullImageURL string     `json:"mtsFullImageUrl"`
+        MtsIcon         any        `json:"mtsIcon"`
+        Name            string     `json:"name"`
+        ParentID        *StationID `json:"parentId"`
+        Restrictions    any        `json:"restrictions"`
+        Restrictions2   any        `json:"restrictions2"`
+}
+
+type Station struct {
+        AdParams       any                `json:"adParams"`
+        CustomName     string             `json:"customName"`
+        Data           any                `json:"data"`
+        Explanation    string             `json:"explanation"`
+        Prerolls       []any              `json:"prerolls"`
+        RupTitle       string             `json:"rupTitle"`
+        RupDescription string             `json:"rupDescription"`
+        Settings       any                `json:"settings"`
+        Settings2      *StationSettings2  `json:"settings2"`
+        Station        StationDescription `json:"station"`
+}
+
+type StationsDashboard struct {
+        DashboardID string    `json:"dashboardId"`
+        Pumpkin     bool      `json:"pumpkin"`
+        Stations    []Station `json:"stations"`
+}
+
+type StationSettings2 struct {
+        Diversity  string `json:"diversity"`
+        Language   string `json:"language"`
+        MoodEnergy string `json:"moodEnergy"`
+}
+
+type SequenceItem struct {
+        Liked           bool        `json:"liked"`
+        Track           track.Track `json:"track"`
+        TrackParameters any         `json:"trackParameters"`
+        Type            string      `json:"type"`
+}
+
+type StationSequence struct {
+        BatchID        string         `json:"batchId"`
+        ID             StationID      `json:"id"`
+        Pumpkin        bool           `json:"pumpkin"`
+        RadioSessionID string         `json:"radioSessionId"`
+        Sequence       []SequenceItem `json:"sequence"`
+}
+
+type StationFeedbackType string
+
+const (
+        FeedbackRadioStarted  StationFeedbackType = "radioStarted"
+        FeedbackTrackStarted  StationFeedbackType = "trackStarted"
+        FeedbackTrackFinished StationFeedbackType = "trackFinished"
+        FeedbackSkip          StationFeedbackType = "skip"
+)
+
+type stationFeedback struct {
+        Type               StationFeedbackType `json:"type"`
+        Timestamp          int64               `json:"timestamp"`
+        From               string              `json:"from"`
+        TotalPlayedSeconds float64             `json:"totalPlayedSeconds,omitempty"`
+        TrackID            string              `json:"trackId,omitempty"`
+}
+
+func newFeedback(t StationFeedbackType, from string, trackID string, total float64, ts int64) stationFeedback <span class="cov0" title="0">{
+        return stationFeedback{Type: t, From: from, TrackID: trackID, TotalPlayedSeconds: total, Timestamp: ts}
+}</span>
+
+// Utility to generate unix seconds
+func nowUnix() int64 <span class="cov0" title="0">{ return time.Now().Unix() }</span>
+
+// NewFeedbackPayload constructs payload used by RadioService.Feedback.
+func NewFeedbackPayload(t StationFeedbackType, from, trackID string, total float64, ts int64) stationFeedback <span class="cov0" title="0">{
+        if ts == 0 </span><span class="cov0" title="0">{
+                ts = nowUnix()
+        }</span>
+        <span class="cov0" title="0">return newFeedback(t, from, trackID, total, ts)</span>
+}
+</pre>
+		
+		<pre class="file" id="file21" style="display: none">package search
+
+import (
+        "context"
+        "net/url"
+        "strconv"
+
+        "github.com/Banjirome/yandex-music-go/models"
+)
+
+// Service реализует методы поиска.
+type Service struct{ c internalClient }
+
+// (legacy clientAdapter removed)
+
+type internalClient interface {
+        SearchDo(ctx context.Context, typ Type, text string, page, pageSize int) (*models.Response[Search], error)
+        SuggestDo(ctx context.Context, part string) (*models.Response[Suggest], error)
+}
+
+// Конструктор вызывается из client пакета.
+func NewService(c internalClient) *Service <span class="cov8" title="1">{ return &amp;Service{c: c} }</span>
+
+// Search универсальный метод.
+func (s *Service) Search(ctx context.Context, text string, typ Type, page, pageSize int) (*models.Response[Search], error) <span class="cov8" title="1">{
+        return s.c.SearchDo(ctx, typ, text, page, pageSize)
+}</span>
+
+// Helper методы.
+func (s *Service) Tracks(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov8" title="1">{
+        return s.Search(ctx, text, TypeTrack, page, pageSize)
+}</span>
+func (s *Service) Albums(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypeAlbum, page, pageSize)
+}</span>
+func (s *Service) Artists(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypeArtist, page, pageSize)
+}</span>
+func (s *Service) Playlists(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypePlaylist, page, pageSize)
+}</span>
+func (s *Service) PodcastEpisodes(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypePodcastEpisode, page, pageSize)
+}</span>
+func (s *Service) Videos(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypeVideo, page, pageSize)
+}</span>
+func (s *Service) Users(ctx context.Context, text string, page, pageSize int) (*models.Response[Search], error) <span class="cov0" title="0">{
+        return s.Search(ctx, text, TypeUser, page, pageSize)
+}</span>
+
+// Suggest возвращает подсказки (GET search/suggest?part=...)
+func (s *Service) Suggest(ctx context.Context, part string) (*models.Response[Suggest], error) <span class="cov0" title="0">{
+        return s.c.SuggestDo(ctx, part)
+}</span>
+
+// Integrating with client: реализация метода SearchDo должна находиться в пакете client.
+
+// BuildQuery утилита (если понадобится внешнему коду в будущем).
+func BuildQuery(text string, typ Type, page, pageSize int) url.Values <span class="cov8" title="1">{
+        q := url.Values{}
+        q.Set("text", text)
+        q.Set("type", string(typ))
+        q.Set("page", strconv.Itoa(page))
+        q.Set("pageSize", strconv.Itoa(pageSize))
+        return q
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
